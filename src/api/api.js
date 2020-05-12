@@ -5,3 +5,9 @@ const api = axios.create({
 });
 
 export default api;
+
+/**
+ * Como consumir dados da API com React
+ * https://celke.com.br/artigo/como-consumir-dados-da-api-com-react
+ * 
+ */

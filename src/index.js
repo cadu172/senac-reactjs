@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import FrmMain from './components/Main/FrmMain';
+import FrmCadastroAluno from './components/Aluno/FrmCadastroAluno';
 import FrmCadastro from './components/Cadastro/FrmCadastro';
 import NotFound404 from './components/Error/NotFound404';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -18,7 +19,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 ReactDOM.render(
   <BrowserRouter>
         <Switch>
-            <Route path="/" exact={true} component={App} />
+            <Route path="/" exact={true} component={FrmMain} />
+            <Route path="/Aluno" exact={true} component={FrmCadastroAluno} />
             <Route path="/Cadastro" component={FrmCadastro} />
             <Route path="*" component={NotFound404} />
         </Switch>

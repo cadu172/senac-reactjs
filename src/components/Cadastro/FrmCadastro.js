@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import api from '../../api/api';
-import { Link } from 'react-router-dom'
 
 import "./FrmCadastro.css";
+
+/**
+ * como consumir uma API com axios
+ * https://celke.com.br/artigo/como-consumir-dados-da-api-com-react
+ * 
+ */
 
 function FrmCadastro() {
 
@@ -113,7 +118,7 @@ function FrmCadastro() {
   return (
     <>
       <form className="formulario" onSubmit={handleCadastrar}>
-        <h3>Cadastro de Aluno (Versão com Axios)</h3>
+        <h3>Cadastro Usando Axios</h3>
         <div className="row">
           <span>Nome</span>
           <input
@@ -179,10 +184,6 @@ function FrmCadastro() {
         ))
         }
       </ul>
-      <hr />
-      <p><Link to="/Cadastro">Página Cadastro <strong>Function Cadastro</strong></Link></p>
-      <p><Link to="/">Página Principal <strong>Function APP</strong></Link></p>
-      <p><Link to="/qualquerlinksopradarerro">Página Erro 404 <strong>/components/Error/NotFound404</strong></Link></p>
     </>
   );
 }
