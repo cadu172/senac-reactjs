@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import api from '../../api/api';
-
 import "./FrmCadastro.css";
 
 /**
@@ -57,10 +55,10 @@ function FrmCadastro() {
     return(aluno.nome);
   });*/
 
-  function handlerChange(event) {
+  function handlerChange(objeto) {
     setAluno({
       ...aluno,
-      [event.target.name]: event.target.value,
+      [objeto.target.name]: objeto.target.value,
     });
   }
 

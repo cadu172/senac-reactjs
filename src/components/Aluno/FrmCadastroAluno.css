@@ -49,9 +49,26 @@ form .row button {
   font-size: 18px;
 }  
 
-.errorMessage {
-  padding: 5px;
+.errDialog {
+  flex: 1;  
   background-color: #a52a2a;
-  color: #ffffff;  
-  text-align: center;  
+  color: #ffffff;    
+}
+
+.inputError {
+  border: solid 4px #a52a2a;
+}
+
+.errorAxios {
+  background-color: #f76f00;
+  color: #fff;  
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.successAxios {
+  background-color: #002e08;
+  color: #fff;  
+  font-weight: bold;
+  font-size: 13px;
 }
