@@ -1,6 +1,6 @@
 
 .container {
-  width: 400px;  
+  max-width: 400px;  
   border: 2px solid #c0c0c0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 10px;

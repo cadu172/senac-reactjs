@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import "./FrmCadastroAluno.css";
-import api from "../../api/api";
+import api from "../../services/api";
 
 function FrmCadastroAluno() {
 
@@ -12,7 +12,7 @@ function FrmCadastroAluno() {
   // valor padrão para aluno
   const valorInicial = {
     name: "",
-    user: "",
+    username: "",
     email: "",
     password: "",
     confirm_password: ""
@@ -65,11 +65,8 @@ function FrmCadastroAluno() {
         console.log(resposta); // imprimie o retorno no console
       })
       .catch(erro => {
-        setResponseErro("Ocorreu o seguinte erro ao Gravar => " + erro.response.status + ' - ' + erro.response.statusText);
         console.log(erro); // imprimie o retorno no console
-      })
-      .finnaly(()=>{
-        // aqui eu posso fazer alguma coisa
+        setResponseErro("Ocorreu o seguinte erro ao Gravar => " + erro.response.status + ' - ' + erro.response.statusText);        
       })
 
   }
@@ -94,9 +91,9 @@ function FrmCadastroAluno() {
         <div className="row">          
           <input
             type="text"
-            name="user"
+            name="username"
             placeholder="Nome de Usuário"
-            value={user.user}
+            value={user.username}
             onChange={handlerChange}
           />
         </div>
