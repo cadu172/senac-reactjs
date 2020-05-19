@@ -30,3 +30,8 @@
     padding: 50px;
     display: block;    
 }
+
+label {
+    display: block;
+    width: 80px;
+}

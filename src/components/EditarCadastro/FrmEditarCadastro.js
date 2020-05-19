@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useEffect} from 'react';
+import React, {useCallback, useState, useEffect, useRef} from 'react';
 
 import api from "../../services/api";
 
@@ -14,11 +14,21 @@ export default function FrmEditarCadastro({param_usuario,return_callBack}) {
         password: "",
         username: "",        
         _id: ""        
-    });    
+    });
+    
+    // referencia (para componente HTML)
+    const ref = useRef(null);
 
     useEffect(()=>{
-        setUser(param_usuario)
-    },[param_usuario]);
+        
+        // carregar usuário atual
+        setUser(param_usuario);
+        
+        // mudar o focus
+        if(ref.current.name==="name")
+        ref.current.focus();        
+
+    },[param_usuario,ref]);
 
     /**
      * atualiza o estado do usuário passado
@@ -72,21 +82,25 @@ export default function FrmEditarCadastro({param_usuario,return_callBack}) {
         <div className="modalContainer">
             <form onSubmit={salvarAlteracao}> 
             <div className="modalBox">
-                <div className="row">                    
-                    <input type="text"
+                <div className="row">
+                    <label for="_id">ID:</label>
+                    <input type="text"                        
                         name="_id"
                         id="_id"
                         onChange={handleUpdateUser}
                         value={usuario._id}/>                    
                 </div>                
                 <div className="row">                    
+                    <label for="name">NOME:</label>
                     <input type="text"
+                        ref={ref}
                         name="name"                        
                         id="name"                        
                         onChange={handleUpdateUser}
                         value={usuario.name}/>                    
                 </div>                
                 <div className="row">                    
+                    <label for="email">E-MAIL:</label>
                     <input type="text"
                         name="email"                        
                         id="email"                        
@@ -94,6 +108,7 @@ export default function FrmEditarCadastro({param_usuario,return_callBack}) {
                         value={usuario.email}/>                    
                 </div> 
                 <div className="row">                    
+                <label for="username">USUÁRIO:</label>
                     <input type="text"
                         name="username"                        
                         id="username"                        
@@ -102,6 +117,7 @@ export default function FrmEditarCadastro({param_usuario,return_callBack}) {
                 </div> 
 
                 <div className="row">                    
+                    <label for="password">SENHA:</label>
                     <input type="text"
                         name="password"                        
                         id="password"                        
