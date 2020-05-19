@@ -1,7 +1,7 @@
 import React from 'react';
 import Main from './Main';
-import FrmCadastroAluno from './components/Aluno/FrmCadastroAluno';
-import FrmCadastroUsuario from './components/CadastroUsuario/FrmCadastroUsuario';
+import FrmEditarCadastro from './components/EditarCadastro/FrmEditarCadastro';
+import FrmIncluirCadastro from './components/IncluirCadastro/FrmIncluirCadastro';
 import Listagem from './components/Listagem/ListagemUsuario';
 import NotFound404 from './components/Error/NotFound404';
 import { BrowserRouter,
@@ -13,8 +13,8 @@ export default function Routes() {
         <BrowserRouter>
         <Switch>            
             <Route path="/" exact={true} component={Main} />
-            <Route path="/Aluno" exact={true} component={FrmCadastroAluno} />
-            <Route path="/Usuario" component={FrmCadastroUsuario} />
+            <Route path="/EditarCadastro" exact={true} component={FrmEditarCadastro} />
+            <Route path="/IncluirCadastro" component={FrmIncluirCadastro} />
             <Route path="/Listagem" component={Listagem} />
             <Route path="*" component={NotFound404} />
         </Switch>

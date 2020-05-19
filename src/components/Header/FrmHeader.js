@@ -5,7 +5,7 @@ function Header() {
     return(
         <header>
             <nav>
-                <a href="/Aluno">Cadastro de Alunos</a>
+                <a href="/IncluirCadastro">Cadastro</a>
                 <a href="/Listagem">Listagem</a>
             </nav>
         </header>

@@ -49,3 +49,14 @@ table tbody tr td {text-align: center;}
     padding-bottom: 5px;
     text-align: center;
 }
+
+.successMessage {
+    background-color: #224e09;
+    color: #fff;  
+    font-weight: bold;
+    font-size: 13px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}

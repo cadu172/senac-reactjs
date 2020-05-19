@@ -1,8 +1,12 @@
-import React, {useState, useRef, useEffect} from 'react';
-import "./FrmCadastroAluno.css";
+import React, {useState,
+              useRef,
+              useEffect,
+              useCallback} from 'react';
+import { useHistory } from "react-router-dom";              
+import "./FrmIncluirCadastro.css";
 import api from "../../services/api";
 
-function FrmCadastroAluno() {
+function FrmIncluirCadastro() {
 
   /**
    * useState e useEffect
@@ -23,6 +27,9 @@ function FrmCadastroAluno() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [response, setResponse] = useState(null);
   const [responseErro, setResponseErro] = useState(null);
+
+  // history
+  const history = useHistory();
   
   /**
    * useEffect trabalha como o evento OnLoad do documento
@@ -33,23 +40,66 @@ function FrmCadastroAluno() {
     ref.current.focus();
   },[ref]);
 
+  // alterado para usar com acllback
+  const handlerChange = useCallback((objeto)=>{
+    setUser({
+      ...user,
+      [objeto.target.name]: objeto.target.value
+    });    
+  },[user]);
+
   // aqui eu passo a informaçãodigitada nos campos para o Json que será enviado para API
-  function handlerChange(objeto) {
+  /*function handlerChange(objeto) {
     setUser({
       ...user,
       [objeto.target.name]: objeto.target.value
     });
-  };
+  };*/
 
-  function verificaSenha() {    
+  // alterado para usar com callback
+  const verificaSenha = useCallback(()=>{
+    if ( user.password !== user.confirm_password ) 
+      setErrorMessage("Senhas Diferentes")
+    else setErrorMessage(null);
+  },[user]);
+
+  /*function verificaSenha() {    
     if ( user.password !== user.confirm_password ) 
       setErrorMessage("Senhas Diferentes")
     else setErrorMessage(null);
 
-  }
+  }*/
+
+  /**
+   * 
+   * função de gravação do login, usando o hook useCallBack
+   */
+  const handleSubmit = useCallback((p_form)=>{
+     
+    // impedir recarregamento no submit
+     p_form.preventDefault();
+
+     // aqui zera as mensagens de erro
+     setResponseErro(null);
+     setResponse(null);
+ 
+     // envia requisição para API
+     api.post('users',user)
+       .then(resposta => {
+         //setResponse("Cadastro Incluído com Sucesso");
+         history.push("/Listagem");
+         console.log(resposta); // imprimie o retorno no console
+       })
+       .catch(erro => {
+         console.log(erro); // imprimie o retorno no console
+         setResponseErro("Ocorreu o seguinte erro ao Gravar => " + erro.response.status + ' - ' + erro.response.statusText);        
+       })
+ 
+
+  },[user,history]);
 
   // submit
-  function handleSubmit(p_form) {    
+  /*function handleSubmit(p_form) {    
     
      // impedir recarregamento no submit
     p_form.preventDefault();
@@ -69,12 +119,12 @@ function FrmCadastroAluno() {
         setResponseErro("Ocorreu o seguinte erro ao Gravar => " + erro.response.status + ' - ' + erro.response.statusText);        
       })
 
-  }
+  }*/
 
   return (
-    <div className="container">
+    <div className="container_incluir">
       <form onSubmit={handleSubmit}>
-        <h3>Cadastro de Aluno</h3>
+        <h3>Cadastro de Usuário</h3>
         {responseErro && <div className="errorAxios row">{responseErro}</div>}
         {response && <div className="successAxios row">{response}</div>}
         <div className="row">          
@@ -83,7 +133,7 @@ function FrmCadastroAluno() {
             type="text"
             name="name"            
             value={user.name}
-            placeholder="Nome do Aluno"
+            placeholder="Nome completo"
             onChange={handlerChange}
           />
         </div>
@@ -92,7 +142,7 @@ function FrmCadastroAluno() {
           <input
             type="text"
             name="username"
-            placeholder="Nome de Usuário"
+            placeholder="Login"
             value={user.username}
             onChange={handlerChange}
           />
@@ -148,4 +198,4 @@ function FrmCadastroAluno() {
   );
 }
 
-export default FrmCadastroAluno;
+export default FrmIncluirCadastro;

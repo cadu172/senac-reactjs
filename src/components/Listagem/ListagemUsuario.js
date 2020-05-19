@@ -1,6 +1,6 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState, useCallback} from 'react';
 import api from '../../services/api';
-import FrmCadastroUsuario from '../CadastroUsuario/FrmCadastroUsuario';
+import FrmEditarCadastro from '../EditarCadastro/FrmEditarCadastro';
 import './ListagemUsuario.css';
 
 export default function Listagem() {
@@ -10,6 +10,9 @@ export default function Listagem() {
 
     // mensagem de erro
     const [errorMessage, setErrorMessage] = useState(null);
+
+    // mensagem de gravação com sucesso
+    const [successMessage, setSuccessMessage] = useState(null);
 
     // usuario atual que esta sendo alterado
     const [usuarioAtual, setUsuarioAtual] = useState(null);
@@ -35,15 +38,33 @@ export default function Listagem() {
      * @param {*} p_Value
      * Chamar o componente formulário para ediçao dos dados 
      */
-    function handleEditar(p_Value) {
+    /*function handleEditar(p_Value) {
         //console.log(p_Value)
         setUsuarioAtual(p_Value);
-    }
+    }*/
+
+    const handleEditar = useCallback((p_Value)=>{
+        console.log(p_Value);
+        setUsuarioAtual(p_Value);
+    },[]);
+
+    const handleExecuteCallBack = useCallback((p_Retorno) => {
+        if (p_Retorno.error===0) 
+            setSuccessMessage(p_Retorno.status)
+        else if ( p_Retorno.error > 0 ) {
+            setErrorMessage(p_Retorno.status)
+        }                
+        // fechar formulário
+        setUsuarioAtual(null);
+    },[]);
+
+
 
     return (
         <div>
             <div className="row">
             {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+            {successMessage && <div className="successMessage">{successMessage}</div>}
             <table>
             <caption>Relaçao de Usuários Cadastrados</caption>
             <thead>
@@ -78,7 +99,7 @@ export default function Listagem() {
             </table>
             </div>
             <div className="row">
-                {usuarioAtual && <FrmCadastroUsuario usuario={usuarioAtual} /> }
+                {usuarioAtual && <FrmEditarCadastro param_usuario={usuarioAtual} return_callBack={handleExecuteCallBack} /> }
             </div>
         </div>
     );
