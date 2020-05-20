@@ -1,4 +1,6 @@
-import React,{useEffect, useState, useCallback} from 'react';
+import React,{useEffect,
+                useState,
+                useCallback} from 'react';
 import api from '../../services/api';
 import FrmEditarCadastro from '../EditarCadastro/FrmEditarCadastro';
 import './ListagemUsuario.css';

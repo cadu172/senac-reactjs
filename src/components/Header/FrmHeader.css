@@ -20,3 +20,11 @@ nav a:hover {
     transition: ease-out;
     transition-duration: .3s;
 }
+
+nav span {
+    color: #fff;
+    display: block;
+    width: 100%; 
+    text-align: right;
+    padding-right: 50px;
+}

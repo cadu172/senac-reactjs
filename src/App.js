@@ -3,12 +3,16 @@ import Routes from './routes';
 import Header from './components/Header/FrmHeader';
 import './App.css';
 
+import { UserProvider } from './components/Context/UserContext';
+
 function App() {
-    return(        
+    return (                
         <div>                                    
+            <UserProvider>
             <Header />
             <Routes />
-        </div>
+            </UserProvider>
+        </div>        
     );
 }
 
